@@ -1,0 +1,6 @@
+{
+  "pathList": {
+    "lsmCategories": "config/lsm_categories.yaml",
+    "keigoLexicon": "config/keigo_lexicon.yaml"
+  }
+}

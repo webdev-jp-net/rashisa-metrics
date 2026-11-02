@@ -1,0 +1,43 @@
+@layer layout {
+  .card {
+    border: 1px solid var(--rule-soft);
+    box-shadow: var(--shadow-card);
+    background: var(--paper-card);
+    padding: var(--s3);
+  }
+
+  .card h3 {
+    font-size: var(--t-h3);
+    line-height: var(--t-h3);
+    margin: 0 0 var(--s2);
+  }
+
+  .card h3 .num {
+    font-family: var(--font-head);
+    color: var(--ink-desc);
+    font-weight: 700;
+    margin-right: 0.5em;
+  }
+
+  .card p {
+    font-size: var(--t-sm);
+    line-height: var(--lh-sm);
+    margin: 0;
+  }
+
+  .card .example {
+    font-size: var(--t-xs);
+    line-height: var(--lh-xs);
+    color: var(--ink-desc);
+    margin-top: var(--s1);
+  }
+
+  .card .subtitle {
+    font-family: var(--font-mono);
+    font-size: var(--t-sm);
+    font-weight: 400;
+    color: var(--ink-1);
+    margin-left: var(--s1);
+    font-size-adjust: from-font;
+  }
+}

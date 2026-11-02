@@ -1,0 +1,70 @@
+# LSM（Language Style Matching）日本語カテゴリ定義
+# 原型: Ireland & Pennebaker の LSM。機能語カテゴリごとの使用率一致度
+# 日本語調整の方針:
+#   - 英語の冠詞・前置詞カテゴリは日本語に存在しないため、助詞の下位分類（格・係/とりたて・接続・終）で置き換える
+#   - カテゴリ判定は品詞（第1〜2階層）を主、lemma リストを従とする
+# 式: LSM_c = 1 - |pA_c - pB_c| / (pA_c + pB_c)（a+bが0のときは1）
+#     pX_c = 対象Xにおける カテゴリc の形態素数 / 総形態素数
+#     全体LSM = 全カテゴリの単純平均。カテゴリ別値も必ず併記する
+# meta は計測処理から参照されない（版・トークナイザ名は各プロファイルJSONのmeasurementフィールドに記録する）
+
+meta:
+  version: '1.1'
+
+categoryList:
+  caseParticles: # 格助詞
+    posFilter: ['助詞', '格助詞']
+  bindingParticles: # 係助詞・とりたて（は・も・こそ・さえ・まで・だけ・しか・ばかり）
+    posFilter: ['助詞', '係助詞']
+    extraLemmaList: [だけ, しか, ばかり, まで, さえ, こそ]
+  conjunctiveParticles: # 接続助詞（て・ので・から・けど・が・のに・ば・たら）
+    posFilter: ['助詞', '接続助詞']
+  finalParticles: # 終助詞（ね・よ・かな・か・な・わ）
+    posFilter: ['助詞', '終助詞']
+    notes: 英語LSMに対応物なし。日本語の対人スタンス同調の主要マーカーのため追加。原型からの逸脱として記録
+  auxiliaries: # 助動詞（です・ます・た・ない・そうだ・ようだ 等）
+    posFilter: ['助動詞']
+  conjunctions: # 接続詞（そして・でも・ただ・また・あと・つまり）
+    posFilter: ['接続詞']
+  pronouns: # 代名詞（これ・それ・あれ・私・自分・こちら）
+    posFilter: ['代名詞']
+  adverbs: # 副詞（もう・まだ・ちょっと・やはり 等）
+    posFilter: ['副詞']
+  negations: # 否定（助動詞ない・ぬ、形容詞ない、動詞接続の ず）
+    lemmaList: [ない, ぬ, ず]
+    notes: 品詞をまたぐため lemma 照合。形容詞「ない」（存在否定）と助動詞「ない」（動詞否定）は合算し、内訳を参考出力する
+    excludeModalConstruction: true
+    excludeModalConstructionNotes: >-
+      2026-09-19（v1.1）追加。同一メッセージ内で「か(助詞) も(助詞) しれる／知れる(動詞) [ます] ない／ぬ／ず(助動詞)」と
+      並ぶ末尾の否定助動詞は推量表現「かもしれない」の一部であり否定に数えない。判定は lexicons.lsm_category_occurrences
+  quantifiers: # 数量・程度（全部・少し・たくさん・くらい・ほど・全て・多く）
+    lemmaList:
+      [
+        全部,
+        全て,
+        すべて,
+        少し,
+        たくさん,
+        沢山,
+        くらい,
+        ぐらい,
+        ほど,
+        一部,
+        半分,
+        大体,
+        だいたい,
+        多く,
+        数多く,
+        多い,
+        数多い,
+        多数,
+        大量,
+        少量,
+        少ない,
+      ]
+    notes: 2026-09-19（v1.1）に 多く・数多く・多い・数多い・多数・大量・少量・少ない を追加。旧版では辞書漏れで数えていなかった
+
+exclusionList:
+  - プレースホルダ・絵文字ショートコード・URL タグは形態素列から除外してから算出する（Phase 0 の分離済みカラムを使用）
+  - 窓内の総形態素数が minTokens 未満の話者を含む窓は LSM を算出せず「n不足」として出力する
+minTokens: 100

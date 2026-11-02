@@ -1,0 +1,183 @@
+@use '@/styles/_variable' as *;
+
+@layer base {
+  .wrap {
+    overflow-x: auto;
+  }
+}
+
+@layer layout {
+  .name .scopeLink {
+    appearance: none;
+    background: none;
+    border: none;
+    padding: 0;
+    position: relative;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: var(--t-md);
+    line-height: 1;
+    letter-spacing: 0;
+    cursor: pointer;
+    color: var(--ink-2);
+    white-space: nowrap;
+  }
+
+  .name .scopeLink:hover {
+    @include hint-blur;
+  }
+}
+
+@layer components {
+  .evidence small,
+  .evidence .hint {
+    color: var(--ink-desc);
+  }
+
+  .evidence .hint {
+    font-size: var(--t-sm);
+    line-height: var(--lh-sm);
+    margin: 0;
+  }
+
+  .evidence .hints {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s2);
+  }
+
+  .evidence {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s2);
+  }
+
+  .evidence .controls {
+    display: flex;
+    gap: 0;
+    align-items: stretch;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--ink-1);
+  }
+
+  .evidence .controls button {
+    @include btn-tab(var(--t-md), var(--lh-md-tight), 'aria-pressed');
+    white-space: nowrap;
+  }
+
+  .evidence .wrap {
+    overflow: auto;
+    max-height: rem(736);
+    border: 1px solid var(--rule-soft);
+    background: var(--paper-card);
+  }
+
+  .evidence table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+  }
+
+  .evidence th,
+  .evidence td {
+    padding: var(--pad-cell);
+    border-bottom: 1px solid var(--rule-neutral);
+    text-align: right;
+    white-space: nowrap;
+    min-width: rem(96);
+  } /* 4〜5桁の数値+パディングの下限 */
+
+  .evidence thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: var(--paper-sepia);
+    text-align: center;
+    font-weight: 700;
+  }
+
+  .evidence thead span,
+  .evidence thead small {
+    display: block;
+    font-size: var(--t-xs);
+    line-height: var(--lh-xs);
+    font-weight: 400;
+  }
+
+  .evidence thead span {
+    color: var(--ink-desc);
+  }
+
+  .evidence tbody tr:first-child th,
+  .evidence tbody tr:first-child td {
+    border-bottom: var(--rule-w-strong) solid var(--ink-3);
+    font-weight: 700;
+  }
+
+  .evidence tbody tr:last-child th,
+  .evidence tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .evidence .name {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background: linear-gradient(var(--paper-card), var(--paper-card)) var(--paper);
+    color: var(--ink-1);
+    text-align: left;
+    width: rem(112);
+    min-width: rem(112);
+    padding-left: var(--s2);
+    padding-right: var(--s2);
+    border-right: 1px solid var(--rule-neutral);
+    font-family: var(--font-body);
+  }
+
+  .evidence .name .scopeLink {
+    text-align: left;
+  }
+
+  .evidence thead .name {
+    background: var(--paper-sepia);
+    z-index: 3;
+  }
+
+  .evidence .diffcount {
+    position: sticky;
+    left: rem(112);
+    z-index: 1;
+    width: rem(96);
+    min-width: rem(96);
+    background: linear-gradient(var(--paper-card), var(--paper-card)) var(--paper);
+    border-right: 1px solid var(--rule-neutral);
+  }
+
+  .evidence thead .diffcount {
+    background: var(--paper-sepia);
+    z-index: 3;
+  }
+
+  .evidence .size {
+    color: var(--ink-desc);
+  }
+
+  .evidence .neutral {
+    color: var(--ink-1);
+  }
+
+  .evidence td.standout {
+    background: var(--tint-2);
+    color: var(--ink-1);
+    font-weight: 700;
+  }
+}
+
+@layer states {
+  /* sass は @media の後に空白を挿入するため、補間で @media(prefers-reduced-motion:reduce) の表記を保つ */
+  @media#{"(prefers-reduced-motion:reduce)"} {
+    .name .scopeLink {
+      animation: none;
+    }
+  }
+}

@@ -1,0 +1,65 @@
+@use '@/styles/_variable' as *;
+
+@layer base {
+  .caption {
+    width: var(--chart-w);
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: var(--t-lg);
+  }
+
+  .chart .chips {
+    width: var(--chart-w);
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--ink-desc);
+    font-size: var(--t-sm);
+    line-height: var(--lh-sm);
+  }
+}
+
+@layer layout {
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s1);
+    margin-right: var(--s3);
+    font-weight: 400;
+    color: var(--ink-1);
+  }
+
+  .dot {
+    display: block;
+    @include rect(rem(12));
+    flex: none;
+  }
+
+  .a {
+    background: var(--series-a);
+  }
+
+  .b {
+    background: var(--series-b);
+  }
+
+  .chart {
+    @include chart-surface;
+  } /* 図版の読みやすい最大幅 */
+
+  .chart > svg {
+    width: var(--chart-w);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .chart rect:global(.bar) {
+    @include chart-bar-motion;
+  }
+}
+
+@layer states {
+  .chart {
+    @include chart-bar-states;
+  }
+}

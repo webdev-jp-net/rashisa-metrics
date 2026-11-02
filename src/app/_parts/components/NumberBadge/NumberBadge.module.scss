@@ -1,0 +1,9 @@
+@layer layout {
+  .badge {
+    font-family: var(--font-head);
+    font-weight: 400;
+    color: var(--ink-2);
+    margin-right: var(--s1);
+    font-size-adjust: from-font;
+  }
+}

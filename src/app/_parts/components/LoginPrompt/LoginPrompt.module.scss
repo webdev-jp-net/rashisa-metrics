@@ -1,0 +1,50 @@
+@use '@/styles/_variable' as *;
+
+@layer base {
+  .lead {
+    font-size: var(--t-h3);
+    line-height: var(--lh-h3);
+    margin: 0 0 var(--s3);
+    color: var(--series-a);
+  }
+}
+
+@layer layout {
+  .box {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: var(--s5);
+    padding-bottom: var(--s5);
+  }
+
+  .copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s3);
+  }
+
+  .copy p {
+    margin-bottom: 0;
+  }
+
+  .hint {
+    @include scroll-hint-link;
+    appearance: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .box .hint {
+    margin-top: 0;
+  }
+}
+
+@layer states {
+  .hint {
+    @include scroll-hint-states;
+  }
+}

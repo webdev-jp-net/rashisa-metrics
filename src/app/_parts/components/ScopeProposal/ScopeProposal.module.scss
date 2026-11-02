@@ -1,0 +1,13 @@
+@layer components {
+  .panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s3);
+  } /* グループ間 */
+
+  .summary {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s2);
+  } /* 導入の一文と平均LSMの前後 */
+}

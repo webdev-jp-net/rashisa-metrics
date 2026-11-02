@@ -1,0 +1,52 @@
+@use '@/styles/_variable' as *;
+
+@layer base {
+  .list {
+    margin: 0;
+    padding-left: var(--s3);
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s1);
+  }
+
+  .list li {
+    position: relative;
+  }
+
+  .list li::before {
+    content: '';
+    position: absolute;
+    left: calc(-1 * var(--s3));
+    top: var(--s2);
+    width: rem(12);
+    height: 1px;
+    border-radius: 50%;
+    background: var(--ink-desc);
+  }
+}
+
+@layer components {
+  .proposal {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s4);
+  }
+
+  .summary {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s3);
+  }
+
+  .suggestions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s1);
+  }
+
+  .label {
+    color: var(--ink-desc);
+    margin: 0;
+  }
+}

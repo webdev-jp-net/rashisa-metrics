@@ -1,0 +1,219 @@
+@use '@/styles/_variable' as *;
+
+@layer components {
+  .tradeoff {
+    color: var(--ink-desc);
+  }
+
+  .diffbox {
+    font-family: var(--font-system);
+    border: 1px solid var(--diff-border);
+    border-radius: var(--s1);
+    overflow: hidden;
+    background: var(--diff-bg);
+    font-size: var(--t-sm);
+    line-height: var(--lh-sm);
+  }
+
+  .diffbox td {
+    font-family: inherit;
+  }
+
+  .head {
+    display: flex;
+    align-items: center;
+    gap: var(--s1);
+    width: 100%;
+    background: var(--diff-head-bg);
+    border: none;
+    border-bottom: 1px solid var(--diff-border);
+    padding: var(--s1) var(--s2);
+    font: inherit;
+    font-weight: 600;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .head:hover {
+    background: var(--diff-head-hover);
+  }
+
+  .title {
+    font-size: var(--t-md);
+  }
+
+  .unfoldLabel {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    color: var(--diff-muted);
+  }
+
+  .unfoldIcon svg {
+    @include rect(rem(16));
+  }
+
+  .diffbox table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: inherit;
+    line-height: inherit;
+  }
+
+  .diffbox td {
+    border-bottom: none;
+  }
+
+  col.colLn {
+    width: rem(48);
+  } /* 3桁行番号+左右パディングの下限 */
+
+  td.ln {
+    width: rem(48);
+    text-align: right;
+    padding: 0 var(--s1);
+    color: var(--diff-ln);
+    user-select: none;
+    font-variant-numeric: tabular-nums;
+    background: var(--diff-head-bg);
+    border-right: 1px solid var(--diff-ln-border);
+    vertical-align: top;
+  }
+
+  td.code {
+    padding: 0 var(--s1);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    vertical-align: top;
+    border-right: 1px solid var(--diff-ln-border);
+    text-align: left;
+  }
+
+  td.code:last-child,
+  td.ln:last-child {
+    border-right: none;
+  }
+
+  tr.chg td.delSide {
+    background: var(--diff-del);
+  }
+
+  tr.chg td.insSide {
+    background: var(--diff-ins);
+  }
+
+  tr.chg td.ln.delSide {
+    background: var(--diff-del-ln);
+  }
+
+  tr.chg td.ln.insSide {
+    background: var(--diff-ins-ln);
+  }
+
+  tr.chg td.blankSide {
+    background: var(--diff-head-bg);
+  }
+
+  .mark {
+    background: var(--diff-del-mark);
+    color: inherit;
+    padding: 0;
+    font: inherit;
+    text-decoration: none;
+  }
+
+  tr.chg td.insSide .mark {
+    background: var(--diff-ins-mark);
+  }
+
+  tr.fold td {
+    padding: 0;
+    border-right: none;
+  }
+
+  .foldIconCell {
+    width: rem(48);
+    background: var(--diff-ln-border);
+  }
+
+  .foldLabelCell {
+    background: var(--diff-fold-label);
+  }
+
+  .foldButton {
+    display: flex;
+    align-items: center;
+    @include rect(100%);
+    text-align: left;
+    font: inherit;
+    border: none;
+    cursor: pointer;
+    background: transparent;
+  }
+
+  .foldIconCell .foldButton {
+    justify-content: center;
+    padding: 0;
+    color: var(--diff-fold-icon);
+  }
+
+  .foldButton svg {
+    @include rect(rem(12));
+    min-width: 0;
+  }
+
+  .foldIconCell .foldButton:hover {
+    background: var(--diff-fold-icon-hover);
+  }
+
+  .foldLabelCell .foldButton {
+    gap: var(--s1);
+    padding: var(--s1);
+    font-size: var(--t-xs);
+    line-height: var(--lh-xs);
+    color: var(--diff-muted);
+  }
+
+  .foldLabelCell .foldButton:hover {
+    background: var(--diff-fold-hover);
+  }
+
+  .reasonRow td {
+    padding: var(--s3);
+    background: var(--diff-reason-bg);
+    border-top: none;
+    border-bottom: 1px solid var(--diff-reason-border);
+    border-right: none;
+    font-family: var(--font-body);
+    line-height: var(--lh-sm);
+  }
+
+  .reasonInline {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s1);
+  }
+
+  .reasonInline h3 {
+    font-family: var(--font-body);
+    font-size: var(--t-md);
+    line-height: var(--lh-md-tight);
+    margin: 0;
+  }
+
+  .reasonInline p {
+    max-width: rem(896);
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  tr.chg td {
+    border-top: 1px solid var(--diff-reason-border);
+  }
+
+  tr.chg + tr.chg td {
+    border-top: none;
+  }
+}

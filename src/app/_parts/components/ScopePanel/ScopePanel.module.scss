@@ -1,0 +1,29 @@
+@use '@/styles/_variable' as *;
+
+@layer base {
+  .analysis {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s3);
+  }
+}
+
+@layer layout {
+  .panel[hidden] {
+    min-height: 0;
+  }
+
+  .panel {
+    min-height: 100dvh;
+    scroll-margin-top: calc(#{rem(64)} + var(--s3));
+  }
+}
+
+@layer components {
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s5);
+    padding-top: var(--s3);
+  }
+}

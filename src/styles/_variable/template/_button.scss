@@ -1,0 +1,41 @@
+@mixin btn-tab($font-size, $line-height, $selected-attr: 'aria-selected') {
+  appearance: none;
+  background: none;
+  border: none;
+  border-bottom: var(--rule-w-strong) solid transparent;
+  margin-bottom: -1px;
+  padding: var(--s1) var(--s2);
+  font-family: var(--font-head);
+  font-size: $font-size;
+  line-height: $line-height;
+  font-weight: 700;
+  color: var(--ink-2);
+  cursor: pointer;
+  flex: 1;
+  text-align: center;
+  transition:
+    color 0.2s var(--ease-out),
+    border-bottom-color 0.2s var(--ease-out);
+
+  &:hover {
+    color: var(--ink-2);
+    border-bottom-color: var(--ink-4);
+  }
+
+  &:active {
+    color: var(--ink-1);
+    border-bottom-color: var(--ink-2);
+  }
+
+  &[#{$selected-attr}='true'] {
+    color: var(--ink-1);
+    font-weight: 700;
+    border-bottom-color: var(--ink-1);
+
+    &:hover,
+    &:active {
+      color: var(--ink-1);
+      border-bottom-color: var(--ink-1);
+    }
+  }
+}

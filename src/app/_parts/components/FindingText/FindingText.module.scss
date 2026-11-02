@@ -1,0 +1,22 @@
+@layer base {
+  .finding {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s2);
+  }
+
+  .finding h3 {
+    margin: 0;
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s2);
+  }
+
+  .body q {
+    quotes: none;
+    color: var(--series-a);
+  }
+}

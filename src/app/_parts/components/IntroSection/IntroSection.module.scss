@@ -1,0 +1,49 @@
+@use '@/styles/_variable' as *;
+
+@layer layout {
+  .hint {
+    @include scroll-hint-link;
+  }
+
+  .columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: calc(var(--s4) + var(--s3));
+    align-items: start;
+  }
+
+  .copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s5);
+    padding-bottom: var(--s5);
+    align-self: center;
+  }
+
+  .copy .hint {
+    margin-top: 0;
+  }
+
+  .text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s3);
+  }
+
+  .text p {
+    margin-bottom: 0;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s2);
+    margin: 0;
+  }
+}
+
+@layer states {
+  .hint {
+    @include scroll-hint-states;
+  }
+}

@@ -1,0 +1,94 @@
+@use '@/styles/_variable' as *;
+
+@layer components {
+  .scroll {
+    overflow: auto;
+  }
+
+  .metrics {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--paper);
+    min-width: rem(512);
+    table-layout: fixed;
+  }
+
+  .metrics th,
+  .metrics td {
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: var(--pad-cell-wide);
+    text-align: left;
+    vertical-align: top;
+    white-space: nowrap;
+    font-family: var(--font-body);
+  }
+
+  .metrics td {
+    text-align: right;
+  }
+
+  .metrics tbody td:not(.arrow) {
+    font-size: var(--t-sm);
+    font-family: var(--font-mono), var(--font-body);
+  }
+
+  .metrics thead th {
+    text-align: center;
+    padding-top: rem(4);
+    padding-bottom: rem(4);
+    font-weight: 400;
+  }
+
+  .metrics tbody th {
+    background: transparent;
+    white-space: normal;
+  }
+
+  .metrics tbody th .genreBadge {
+    color: inherit;
+  }
+
+  .metrics col.colGenre {
+    width: rem(240);
+  }
+
+  .metrics col.colItem {
+    width: rem(160);
+  }
+
+  .metrics col.colModel {
+    width: rem(280);
+  }
+
+  .metrics th.colGenre {
+    padding-left: rem(80);
+    padding-right: rem(24);
+  }
+
+  .metrics th.colItem {
+    padding: rem(8) rem(24);
+  }
+
+  .metrics td.colModel {
+    padding-left: rem(24);
+    padding-right: rem(100);
+  }
+
+  .metrics .arrow {
+    width: var(--s3);
+    text-align: center;
+    padding: var(--s1) var(--gap-hairline);
+  }
+
+  .metrics tbody .arrow {
+    color: var(--ink-2);
+  }
+
+  .metrics .unit {
+    font-size: var(--t-xs);
+    font-family: var(--font-body);
+    color: var(--ink-desc);
+    margin-left: 0.25em;
+  }
+}

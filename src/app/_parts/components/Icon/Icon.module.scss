@@ -1,0 +1,13 @@
+@use '@/styles/_variable' as *;
+
+@layer components {
+  /* Phosphorアイコン共通: 周囲の文字色・文字サイズに1emで追従。baseの図版用 svg{display:block;min-width:36rem(576px)} を打ち消す */
+  .icon {
+    display: inline-block;
+    @include rect(1em);
+    min-width: 0;
+    flex: none;
+    vertical-align: -0.125em;
+    fill: currentColor;
+  }
+}

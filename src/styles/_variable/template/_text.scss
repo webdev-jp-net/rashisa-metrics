@@ -1,0 +1,95 @@
+@mixin scroll-hint-link {
+  position: relative;
+  display: inline-block;
+  align-self: flex-start;
+  margin-top: var(--s5);
+  padding-left: 1em;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: var(--t-lg);
+  line-height: 1;
+  letter-spacing: 0.06em;
+  color: var(--ink-2);
+  text-decoration: none;
+
+  span {
+    display: inline-block;
+    filter: blur(0);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: -1.25em;
+    width: 1px;
+    height: 2.25em;
+    background: oklch(22% 0.005 88 / 0.25);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: -1.25em;
+    width: 1px;
+    height: 2.25em;
+    background: oklch(22% 0.005 88);
+    clip-path: inset(0 0 100% 0);
+    animation: hint-fill 4s var(--ease-in-out) infinite;
+  }
+
+  &:hover {
+    color: var(--ink-2);
+  }
+
+  &:hover span {
+    @include hint-blur;
+  }
+
+  @keyframes hint-fill {
+    0% {
+      clip-path: inset(0 0 100% 0);
+    }
+    40% {
+      clip-path: inset(0 0 0 0);
+    }
+    60% {
+      clip-path: inset(0 0 0 0);
+    }
+    100% {
+      clip-path: inset(100% 0 0 0);
+    }
+  }
+}
+
+@mixin scroll-hint-states {
+  // sass は @media の後に空白を挿入するため、補間で @media(prefers-reduced-motion:reduce) の表記を保つ
+  @media#{"(prefers-reduced-motion:reduce)"} {
+    span {
+      animation: none;
+    }
+
+    &::after {
+      animation: none;
+      clip-path: none;
+    }
+  }
+}
+
+@mixin hint-blur {
+  animation: hint-blur 2s var(--ease-out);
+
+  /* CSS Modules がアニメーション名をローカル化するため、参照する各モジュールに同じ @keyframes を置く */
+  @keyframes hint-blur {
+    0% {
+      filter: blur(0);
+    }
+    5% {
+      filter: blur(1px);
+    }
+    100% {
+      filter: blur(0);
+    }
+  }
+}

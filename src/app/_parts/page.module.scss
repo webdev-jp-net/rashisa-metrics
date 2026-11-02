@@ -1,0 +1,58 @@
+@layer base {
+  .report {
+    grid-column: full;
+    display: grid;
+    grid-template-columns: subgrid;
+    scroll-snap-align: start;
+    padding-bottom: var(--s5);
+  }
+
+  .report > * {
+    grid-column: content;
+  }
+}
+
+@layer layout {
+  .viewportSection {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    scroll-snap-align: start;
+    --out: 0;
+    opacity: calc(1 - var(--out) * 0.9);
+    filter: blur(calc(var(--out) * var(--blur-max)));
+    will-change: opacity, filter;
+  }
+}
+
+@layer states {
+  @supports ((animation-timeline: view()) and (animation-range: entry)) {
+    @keyframes section-out {
+      to {
+        opacity: 0.1;
+        filter: blur(var(--blur-max));
+      }
+    }
+
+    .viewportSection {
+      animation: section-out auto linear forwards;
+      animation-timeline: view();
+      animation-range: exit 0% exit 60%;
+    }
+  }
+
+  /* sass は @media の後に空白を挿入するため、補間で @media(prefers-reduced-motion:reduce) の表記を保つ */
+  @media#{"(prefers-reduced-motion:reduce)"} {
+    .viewportSection {
+      animation: none;
+      --out: 0;
+    }
+  }
+
+  @media print {
+    .viewportSection {
+      --out: 0;
+    }
+  }
+}

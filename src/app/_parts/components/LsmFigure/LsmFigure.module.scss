@@ -1,0 +1,39 @@
+@use '@/styles/_variable' as *;
+
+@layer base {
+  .chart > details {
+    width: var(--chart-w);
+    margin-left: auto;
+    margin-right: auto;
+    font-size: var(--t-sm);
+    line-height: var(--lh-sm);
+    color: var(--ink-desc);
+  }
+}
+
+@layer layout {
+  .chart {
+    @include chart-surface;
+  } /* 図版の読みやすい最大幅 */
+
+  .chart > svg {
+    width: var(--chart-w);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .chart > details thead th {
+    background: transparent;
+    border-bottom-width: 2px;
+  }
+
+  .chart rect:global(.bar) {
+    @include chart-bar-motion;
+  }
+}
+
+@layer states {
+  .chart {
+    @include chart-bar-states;
+  }
+}

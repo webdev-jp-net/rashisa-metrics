@@ -1,0 +1,138 @@
+@use '@/styles/_variable' as *;
+
+@layer layout {
+  .wrap {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    grid-column: full;
+  }
+
+  .bar {
+    background: transparent;
+    box-shadow: none;
+    transition:
+      background 0.4s var(--ease-out),
+      box-shadow 0.4s var(--ease-out);
+  }
+
+  .wrap button {
+    visibility: hidden;
+    filter: blur(var(--blur-max));
+    opacity: 0;
+    transition:
+      filter 0.5s var(--ease-out),
+      opacity 0.5s var(--ease-out),
+      visibility 0s 0.5s;
+  }
+
+  .tabs {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    column-gap: rem(40);
+    align-items: center;
+    max-width: calc(#{rem(1120)} + 2 * var(--s3));
+    margin: 0 auto;
+    padding: rem(24) var(--s3);
+    line-height: 1;
+  }
+
+  .list {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    column-gap: rem(24);
+    justify-content: end;
+    align-items: center;
+  }
+
+  .list button {
+    appearance: none;
+    background: none;
+    border: none;
+    padding: 0;
+    position: relative;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: var(--t-md);
+    line-height: 1;
+    letter-spacing: 0;
+    cursor: pointer;
+    color: var(--ink-2);
+    white-space: nowrap;
+  }
+
+  .list button:hover {
+    @include hint-blur;
+  }
+
+  .list button::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: calc(-1 * var(--s2));
+    @include rect(rem(6));
+    border-radius: 50%;
+    background: var(--ink-2);
+    opacity: 0;
+    transform: translateX(-50%) scale(0);
+    filter: blur(3px);
+    transition:
+      transform 0.35s var(--ease-out),
+      opacity 0.35s var(--ease-out),
+      filter 0.35s var(--ease-out);
+  }
+
+  .list button[aria-selected='true'] {
+    color: var(--ink-1);
+  }
+
+  .list button[aria-selected='true']::before {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+    filter: blur(0);
+  }
+
+  .title {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: var(--t-h3);
+    line-height: var(--t-md);
+    letter-spacing: 0.04em;
+    color: var(--ink-1);
+    text-decoration: none;
+    display: block;
+    white-space: nowrap;
+  }
+
+  .title:hover {
+    color: var(--ink-1);
+  }
+}
+
+@layer states {
+  .wrap.stuck .bar {
+    background: linear-gradient(var(--paper-card), var(--paper-card)) var(--paper);
+    box-shadow: var(--shadow-card);
+  }
+
+  .wrap.stuck .bar button {
+    visibility: visible;
+    filter: blur(0);
+    opacity: 1;
+    transition-delay: 0s;
+  }
+
+  /* sass は @media の後に空白を挿入するため、補間で @media(prefers-reduced-motion:reduce) の表記を保つ */
+  @media#{"(prefers-reduced-motion:reduce)"} {
+    .bar,
+    .wrap button,
+    .list button::before {
+      transition: none;
+    }
+
+    .list button {
+      animation: none;
+    }
+  }
+}

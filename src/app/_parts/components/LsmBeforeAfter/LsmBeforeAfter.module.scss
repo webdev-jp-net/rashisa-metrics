@@ -1,0 +1,65 @@
+@use '@/styles/_variable' as *;
+
+@layer components {
+  /* 平均LSMの前後: 「ラベル+数値」の塊2つを矢印で区切る。塊の内側はrem(4)=4px(詰まりすぎを避ける最小の余白、line-height 1)、塊と矢印のあいだは s3 */
+  .summary {
+    display: grid;
+    grid-template-columns: max-content max-content max-content;
+    grid-template-areas:
+      'before-label . after-label'
+      'before-value arrow after-value';
+    column-gap: var(--s3);
+    row-gap: rem(4);
+    width: max-content;
+    margin: 0;
+  }
+
+  .item {
+    display: contents;
+  }
+
+  .summary dt {
+    font-size: var(--t-xs);
+    line-height: var(--lh-xs);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: var(--ink-desc);
+    text-align: left;
+  }
+
+  .before dt {
+    grid-area: before-label;
+  }
+
+  .before dd {
+    grid-area: before-value;
+  }
+
+  .after dt {
+    grid-area: after-label;
+  }
+
+  .after dd {
+    grid-area: after-value;
+  }
+
+  .summary dd {
+    font-family: var(--font-mono), var(--font-body);
+    font-size: var(--t-h3);
+    line-height: 1;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-1);
+    text-align: left;
+    margin: 0;
+  }
+
+  .arrow {
+    grid-area: arrow;
+    font-family: var(--font-body);
+    font-size: var(--t-h3);
+    line-height: 1;
+    color: var(--ink-2);
+    text-align: center;
+  }
+}

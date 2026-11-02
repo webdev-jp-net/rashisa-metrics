@@ -1,0 +1,50 @@
+@use '@/styles/_variable' as *;
+
+@layer base {
+  .analysisTitle {
+    font-family: var(--font-head);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: var(--ink-1);
+    font-size-adjust: from-font;
+    font-size: var(--t-h2);
+    line-height: var(--lh-h2);
+    margin: 0;
+  }
+
+  .axisContent {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s4);
+  }
+}
+
+@layer layout {
+  .axisViewBody {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    border-bottom: 1px solid var(--ink-1);
+  }
+
+  .tabs button {
+    @include btn-tab(var(--t-lg), var(--lh-lg));
+  }
+
+  .axisPanel[hidden] {
+    min-height: 0;
+  }
+}
+
+@layer states {
+  @media print {
+    .analysisTitle {
+      break-after: avoid;
+    }
+  }
+}
