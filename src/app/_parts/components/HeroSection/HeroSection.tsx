@@ -1,4 +1,3 @@
-import { Fragment } from 'react'
 import type { ReportModel } from '../../model/types'
 import styles from './HeroSection.module.scss'
 
@@ -11,11 +10,11 @@ export interface HeroSectionProps {
 }
 
 /**
- * 最初の画面。タイトル・リード文・目的の説明と、次の画面へのリンク。
+ * 最初の画面。タイトル・リード文・導入文と、次の画面へのリンク。
  *
  * @param props
  * @param props.site タイトルとリード文。
- * @param props.hero 目的の説明とリンク文言。
+ * @param props.hero 導入文のHTMLとリンク文言。
  * @returns 描画結果。
  */
 export function HeroSection({ site, hero }: HeroSectionProps) {
@@ -26,14 +25,7 @@ export function HeroSection({ site, hero }: HeroSectionProps) {
           <h1>{site.title}</h1>
           <p className={styles.lead}>{site.lead}</p>
         </header>
-        <p>
-          {hero.paragraphLineList.map((line, index) => (
-            <Fragment key={index}>
-              {line}
-              {index < hero.paragraphLineList.length - 1 ? <br /> : null}
-            </Fragment>
-          ))}
-        </p>
+        <div dangerouslySetInnerHTML={{ __html: hero.descriptionHtml }} />
       </div>
       <a href="#analysis-intro" className={styles.hint} style={HINT_FONT}>
         <span>{hero.hintLabel}</span>

@@ -46,6 +46,7 @@ description: 新しい原資料からシリーズのデータを作り、公開�
   - お手本媒体・編集対象媒体の表示名
   - 許可リスト
   - タイトル「文体解析レポート」、リード文「「らしさ」を数値的・客観的に観測する」（API経由の登録では初期値が入らないので、初期値と同じ文を書く）
+  - 導入文（`description`）に`src/lib/api/microcms.ts`の`DEFAULT_DESCRIPTION`（同じ理由で、初期値と同じ文を書く）
 - **既存のシリーズの作り直し**: スコープの一覧（`scopeId`と表示名）だけを書き換え、ほかの項目は触らない。
 
 呼び出しは、既存の`src/lib/api/microcms.ts`の`createReportClient()`を`bun --env-file=.env.local`で使う。エンドポイントは`series`、新規は`create`、更新は`update`。スコープの繰り返しの行は`fieldId: 'scope'`・`scopeId`・`label`を持つ。新しいスクリプトファイルは作らない。

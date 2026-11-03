@@ -13,6 +13,13 @@ export const REPORT_ENDPOINT = 'report'
 export const TOTAL_SCOPE = 'total'
 
 /**
+ * `series.description`の初期値（microCMSのフィールドの初期値と同じHTML）。`description`が空のシリーズで
+ * 画面が導入文に使い、API経由でシリーズを登録するときにも書く。
+ */
+export const DEFAULT_DESCRIPTION =
+  '<p>この試みの目的は、編集中のテキストがお手本となるメディアの文体と<br>どのように近くどのように離れているのか可視化することです。</p>'
+
+/**
  * 一覧を取るときの件数。microCMSの既定は10件で、全体＋個別スコープの`report`を取りこぼすため明示する。
  */
 const LIST_LIMIT = 100
@@ -90,10 +97,12 @@ export interface SeriesFields {
 
 /**
  * `series`の内容。`allowList`は1行1件で、`@`を含めばメール完全一致、無ければドメイン一致。
- * 1件も登録していなければmicroCMSはこのフィールドを返さない。
+ * `description`はヒーローの導入文で、リンクだけを許可したリッチテキスト（HTML）。
+ * どちらも値が無ければmicroCMSはこのフィールドを返さない。
  */
 export interface Series extends SeriesFields {
   allowList?: string
+  description?: string
 }
 
 /** 取得した`series`の1コンテンツ（コンテンツIDと日時を含む）。 */
