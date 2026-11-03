@@ -1,3 +1,4 @@
 minimumReleaseAge: 10080
 overrides:
   'js-yaml@<3.15.2': 3.15.2
+  'textlint>glob@<14.0.2': ^14.0.2
