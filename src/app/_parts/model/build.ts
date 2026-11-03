@@ -1,7 +1,13 @@
-import { TOTAL_SCOPE, type ReportContent, type SeriesContent } from '@/lib/api/microcms'
+import {
+  DEFAULT_DESCRIPTION,
+  TOTAL_SCOPE,
+  type ReportContent,
+  type SeriesContent,
+} from '@/lib/api/microcms'
 import type { ComparisonScopeData, OverviewCriteria } from '@/lib/data/report-data'
 import { CHAPTER_AXIS_LIST } from '@/lib/policy/comparison'
 import { computeOverviewCriteria } from '@/lib/policy/overview-criteria'
+import { sanitizeHtml } from '@/lib/sanitize'
 import { formatFixed, formatSigned, formatThousands } from '../format'
 import { contentComparisonData, contentFindingList, contentReportMaterial } from './report-content'
 import { scopeProposal } from './scope-proposal'
@@ -314,6 +320,17 @@ function requireContent(byScope: Map<string, ReportContent>, scope: string): Rep
 }
 
 /**
+ * ヒーローの導入文のHTML。シリーズの`description`はサニタイズして使い、空なら初期値を使う。
+ * 初期値はコードの定数なのでサニタイズしない。
+ *
+ * @param description シリーズの`description`。値が無ければmicroCMSは返さない。
+ * @returns 画面に埋め込むHTML。
+ */
+export function descriptionHtml(description: string | undefined): string {
+  return description ? sanitizeHtml(description) : DEFAULT_DESCRIPTION
+}
+
+/**
  * ページ全体の表示モデル。Server Componentがリクエストごとに呼ぶ入口で、microCMSから取得した
  * 1シリーズの内容だけから全スコープ分を組み立てる。ファイルは一切読まない。
  *
@@ -391,10 +408,7 @@ export function buildReportModel(series: SeriesContent, reportList: ReportConten
     viewpointList: VIEWPOINT_LIST,
     scopeList,
     hero: {
-      paragraphLineList: [
-        'この試みの目的は、編集中のテキストがお手本となるメディアの文体と',
-        'どのように近くどのように離れているのか可視化することです。',
-      ],
+      descriptionHtml: descriptionHtml(series.description),
       hintLabel: 'どのように解析？',
     },
     intro: {

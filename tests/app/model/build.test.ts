@@ -1,11 +1,12 @@
 /**
  * `buildReportModel`は、シリーズの`report`が全体スコープまたは`scopeList`のいずれかで欠けていれば
- * 止まる（routing.mdのエラーハンドリング）。ここはその失敗経路だけを、フル計算に要る比較データ等を
+ * 止まる（routing.mdのエラーハンドリング）。ここはその失敗経路を、フル計算に要る比較データ等を
  * 用意せずに確認する（欠落判定は`computeOverviewCriteria`等より前に行われるため）。
+ * あわせて、ヒーローの導入文（`descriptionHtml`）を確認する。
  */
 import { describe, expect, test } from 'bun:test'
-import type { ReportContent, SeriesContent } from '@/lib/api/microcms'
-import { buildReportModel } from '@/app/_parts/model/build'
+import { DEFAULT_DESCRIPTION, type ReportContent, type SeriesContent } from '@/lib/api/microcms'
+import { buildReportModel, descriptionHtml } from '@/app/_parts/model/build'
 
 const DATE_LIST = {
   createdAt: '2026-01-01T00:00:00.000Z',
@@ -35,5 +36,16 @@ describe('buildReportModel', () => {
     expect(() => buildReportModel(SERIES, totalOnly)).toThrow(
       "report: missing content for scope '0'"
     )
+  })
+})
+
+describe('descriptionHtml', () => {
+  test('uses the default when the series has no description', () => {
+    expect(descriptionHtml(undefined)).toBe(DEFAULT_DESCRIPTION)
+    expect(descriptionHtml('')).toBe(DEFAULT_DESCRIPTION)
+  })
+
+  test('uses the sanitized description when the series has one', () => {
+    expect(descriptionHtml('<p>導入文<script>alert(1)</script></p>')).toBe('<p>導入文</p>')
   })
 })
