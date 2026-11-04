@@ -1,5 +1,4 @@
-// primary・secondaryに共通する枠線つきの箱。色だけを呼び出し側のmixinで決める
-@mixin -btn-box {
+@mixin -btn-base {
   appearance: none;
   margin: 0;
   padding: var(--gap-hairline) var(--s2);
@@ -21,7 +20,7 @@
 }
 
 @mixin btn-primary {
-  @include -btn-box;
+  @include -btn-base;
   background: var(--ink-2);
   color: var(--paper);
 
@@ -34,7 +33,7 @@
 }
 
 @mixin btn-secondary {
-  @include -btn-box;
+  @include -btn-base;
   background: var(--paper);
   color: var(--ink-2);
 }
