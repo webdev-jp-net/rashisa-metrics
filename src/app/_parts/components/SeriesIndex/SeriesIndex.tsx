@@ -1,11 +1,12 @@
 'use client'
 
+import { Fragment } from 'react'
 import Link from 'next/link'
 import styles from './SeriesIndex.module.scss'
 import { useSeriesIndex } from './useSeriesIndex'
 
-/** 手書き風リンク（`.hint`）の書体。design-system.md「書体」の手書き風書体と同じスタック。 */
-const HINT_FONT = { fontFamily: "'Zen Kurenaido',var(--font-head)" }
+/** レポートの一覧の見出しのid。一覧のまとまり（`section`）の名前として参照する。 */
+const REPORT_HEADING_ID = 'series-index-report-heading'
 
 /** ルートのリストに出す1シリーズ。 */
 export interface SeriesLink {
@@ -20,8 +21,8 @@ export interface SeriesIndexProps {
 
 /**
  * ルート（`/`）の画面。`LoginPrompt`と同じ`.box`／`.copy`の構成でタイトル・リード文・段落を出し、
- * その下に閲覧できるシリーズへのリンクの一覧（無ければ出さない）、続けて未ログインならログイン、
- * ログイン済みならログアウトのボタンを出す。
+ * その下に閲覧できるシリーズへのリンクの一覧を小見出し付きで（無ければ出さない）、続けて注釈と、
+ * 未ログインならログイン、ログイン済みならログアウトのボタンを出す。
  *
  * @param props
  * @param props.isSignedIn ログインしているか。
@@ -29,7 +30,8 @@ export interface SeriesIndexProps {
  * @returns 描画結果。
  */
 export function SeriesIndex({ isSignedIn, seriesList }: SeriesIndexProps) {
-  const { title, lead, paragraph, handleSignIn, handleSignOut } = useSeriesIndex()
+  const { title, lead, paragraphLineList, reportHeading, authNote, handleSignIn, handleSignOut } =
+    useSeriesIndex()
 
   return (
     <main>
@@ -39,26 +41,41 @@ export function SeriesIndex({ isSignedIn, seriesList }: SeriesIndexProps) {
             <h1>{title}</h1>
             <p className={styles.lead}>{lead}</p>
           </header>
-          <p>{paragraph}</p>
+          <p>
+            {paragraphLineList.map((line, lineIndex) => (
+              <Fragment key={lineIndex}>
+                {line}
+                {lineIndex < paragraphLineList.length - 1 ? <br /> : null}
+              </Fragment>
+            ))}
+          </p>
         </div>
         {seriesList.length > 0 && (
-          <ul className={styles.list}>
-            {seriesList.map(series => (
-              <li key={series.seriesKey}>
-                <Link href={`/${series.seriesKey}`}>{series.siteTitle}</Link>
-              </li>
-            ))}
-          </ul>
+          <section className={styles.reports} aria-labelledby={REPORT_HEADING_ID}>
+            <h2 id={REPORT_HEADING_ID} className={styles.heading}>
+              {reportHeading}
+            </h2>
+            <ul className={styles.list}>
+              {seriesList.map(series => (
+                <li key={series.seriesKey}>
+                  <Link href={`/${series.seriesKey}`}>{series.siteTitle}</Link>
+                </li>
+              ))}
+            </ul>
+          </section>
         )}
-        {isSignedIn ? (
-          <button type="button" className={styles.hint} style={HINT_FONT} onClick={handleSignOut}>
-            <span>ログアウトする</span>
-          </button>
-        ) : (
-          <button type="button" className={styles.hint} style={HINT_FONT} onClick={handleSignIn}>
-            <span>ログインする</span>
-          </button>
-        )}
+        <div className={styles.auth}>
+          <p className={styles.note}>{authNote}</p>
+          {isSignedIn ? (
+            <button type="button" className={styles.button} onClick={handleSignOut}>
+              ログアウトする
+            </button>
+          ) : (
+            <button type="button" className={styles.button} onClick={handleSignIn}>
+              ログインする
+            </button>
+          )}
+        </div>
       </div>
     </main>
   )

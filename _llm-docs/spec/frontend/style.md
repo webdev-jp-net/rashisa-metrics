@@ -54,6 +54,8 @@ CSSカスタムプロパティのトークン（`--s2`等の間隔トークン�
 | `scroll-hint-link`   | 次のセクションへ誘導する手書き風リンク本体（左に縦棒の装飾、`@layer layout`側） |
 | `scroll-hint-states` | 上記リンクのreduced-motion対応（`@layer states`側）                             |
 | `hint-blur`          | hover時に文字が一瞬ぼやけて戻るアニメーション                                   |
+| `btn-primary`        | 塗りのボタン（本体・押せない状態）                                              |
+| `btn-secondary`      | 枠線のボタン                                                                    |
 | `btn-tab`            | 下罫線タブのボタン（本体・hover・active・選択中の4状態）                        |
 
 利用側は次のように`@use`する。

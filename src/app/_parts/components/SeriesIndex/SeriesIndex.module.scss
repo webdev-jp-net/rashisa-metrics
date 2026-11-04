@@ -8,6 +8,8 @@
     display: flex;
     flex-direction: column;
     gap: var(--s1);
+    font-size: var(--t-lg);
+    line-height: var(--lh-lg);
   }
 
   .list li {
@@ -30,6 +32,24 @@
     line-height: var(--lh-h3);
     margin: 0 0 var(--s3);
     color: var(--series-a);
+  }
+
+  // h2要素だが、見た目はh3相当にする
+  .heading {
+    margin: 0;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: var(--t-h3);
+    line-height: var(--lh-h3);
+    letter-spacing: 0.01em;
+    color: var(--ink-1);
+    font-size-adjust: from-font;
+  }
+
+  .note {
+    font-size: var(--t-sm);
+    line-height: var(--lh-sm);
+    color: var(--ink-desc);
   }
 }
 
@@ -54,21 +74,22 @@
     margin-bottom: 0;
   }
 
-  .hint {
-    @include scroll-hint-link;
-    appearance: none;
-    background: none;
-    border: none;
-    cursor: pointer;
+  .reports,
+  .auth {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .box .hint {
-    margin-top: 0;
+  .reports {
+    gap: var(--s1);
   }
-}
 
-@layer states {
-  .hint {
-    @include scroll-hint-states;
+  .auth {
+    gap: var(--s2);
+  }
+
+  .button {
+    @include btn-secondary;
   }
 }

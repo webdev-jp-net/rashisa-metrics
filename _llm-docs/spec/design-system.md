@@ -268,6 +268,15 @@ stuckでない通常状態では、`.wrap button`（スコープボタン群）�
 
 `.chip`はドット（`.dot`、12×12px、系列色`.a`＝`--series-a`／`.b`＝`--series-b`）＋系列名のインラインフレックス。ペア棒グラフの下に系列凡例として使う。
 
+## ボタン
+
+`btn-primary`・`btn-secondary`ミックスイン（`src/styles/_variable/template/_button.scss`）。どちらも枠線1px`--ink-2`・padding`--gap-hairline --s2`・本文書体・サイズ`--t-sm`・行送り`--lh-sm`・折り返しなしで、背景・文字色・枠線色を`.2s var(--ease-out)`で切り替える（縮小モーション設定では切り替えなし）。
+
+| 種類      | 見た目                                                                                       | 使う箇所                                       |
+| --------- | -------------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| primary   | 背景`--ink-2`・文字`--paper`。押せない状態（`disabled`）は背景`--paper`・文字と枠線`--ink-4` | なし                                           |
+| secondary | 背景`--paper`・文字`--ink-2`                                                                 | ルートとログイン促し画面のログイン・ログアウト |
+
 ## リンク・スクロールヒント
 
 通常のリンク（`a`）は色`--ink-2`、hoverで`--ink-1`。「どのように解析？」「レポートをみる」のリンク（`.hint`クラス、`HeroSection.module.scss`／`IntroSection.module.scss`が共通で使う`scroll-hint-link`ミックスイン、`src/styles/_variable/_index.scss`）は明朝体ではなく`--font-hand`（`'Zen Kurenaido',var(--font-head)`）の手書き風書体を使う特別なリンクで、ウェイト700・サイズ`--t-lg`・字間`.06em`・色`--ink-2`。左に縦棒の装飾（`::before`固定表示、`::after`が4秒周期で下から上へ充填されるアニメーション`hint-fill`）を持つ。hoverすると内側の`span`に`hint-blur`アニメーションが掛かる。
