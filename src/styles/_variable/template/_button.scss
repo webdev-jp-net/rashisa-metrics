@@ -1,3 +1,44 @@
+// primary・secondaryに共通する枠線つきの箱。色だけを呼び出し側のmixinで決める
+@mixin -btn-box {
+  appearance: none;
+  margin: 0;
+  padding: var(--gap-hairline) var(--s2);
+  border: 1px solid var(--ink-2);
+  font-family: var(--font-body);
+  font-size: var(--t-sm);
+  line-height: var(--lh-sm);
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background 0.2s var(--ease-out),
+    color 0.2s var(--ease-out),
+    border-color 0.2s var(--ease-out);
+
+  // sass は @media の後に空白を挿入するため、補間で @media(prefers-reduced-motion:reduce) の表記を保つ
+  @media#{"(prefers-reduced-motion:reduce)"} {
+    transition: none;
+  }
+}
+
+@mixin btn-primary {
+  @include -btn-box;
+  background: var(--ink-2);
+  color: var(--paper);
+
+  &:disabled {
+    background: var(--paper);
+    color: var(--ink-4);
+    border-color: var(--ink-4);
+    cursor: default;
+  }
+}
+
+@mixin btn-secondary {
+  @include -btn-box;
+  background: var(--paper);
+  color: var(--ink-2);
+}
+
 @mixin btn-tab($font-size, $line-height, $selected-attr: 'aria-selected') {
   appearance: none;
   background: none;
