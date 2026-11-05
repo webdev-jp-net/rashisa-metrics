@@ -3,9 +3,6 @@
 import styles from './LoginPrompt.module.scss'
 import { useLoginPrompt, type LoginPromptState } from './useLoginPrompt'
 
-/** 手書き風リンク（`.hint`）の書体。design-system.md「書体」の手書き風書体と同じスタック。 */
-const HINT_FONT = { fontFamily: "'Zen Kurenaido',var(--font-head)" }
-
 export interface LoginPromptProps {
   state: LoginPromptState
   siteTitle: string
@@ -38,8 +35,8 @@ export function LoginPrompt({ state, siteTitle, siteLead }: LoginPromptProps) {
             <p key={index}>{paragraph}</p>
           ))}
         </div>
-        <button type="button" className={styles.hint} style={HINT_FONT} onClick={handleClick}>
-          <span>{actionLabel}</span>
+        <button type="button" className={styles.button} onClick={handleClick}>
+          {actionLabel}
         </button>
       </div>
     </main>

@@ -30,21 +30,7 @@
     margin-bottom: 0;
   }
 
-  .hint {
-    @include scroll-hint-link;
-    appearance: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-
-  .box .hint {
-    margin-top: 0;
-  }
-}
-
-@layer states {
-  .hint {
-    @include scroll-hint-states;
+  .button {
+    @include btn-secondary;
   }
 }

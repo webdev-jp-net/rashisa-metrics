@@ -178,7 +178,8 @@ export interface ReportModel {
   media: { model: string; edited: string }
   viewpointList: ViewpointDefinition[]
   scopeList: ScopeModel[]
-  hero: { paragraphLineList: string[]; hintLabel: string }
+  /** `descriptionHtml`はサニタイズ済みの導入文のHTML。 */
+  hero: { descriptionHtml: string; hintLabel: string }
   intro: { paragraphList: string[][]; hintLabel: string }
   analysisTitle: string
 }

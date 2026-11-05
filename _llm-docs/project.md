@@ -47,6 +47,8 @@ RASHISAメトリクスは、「らしさ」を数値で観測する文体比較�
 
 バージョンは承認なしに変更しない（`_llm-rules/core_rules.md`）。
 
+公開から日の浅い版は入れない（期間の正本は`pnpm-workspace.yaml`の`minimumReleaseAge`）。
+
 ## ディレクトリ一覧
 
 | パス                        | 役割                                                                                                                |

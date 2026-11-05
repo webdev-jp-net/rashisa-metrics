@@ -10,14 +10,14 @@ argument-hint: [issue-number]
 
 ## ワークフロー
 
-### Step 1: 現在の状況確認
+### Step 1 現在の状況確認
 
 ```bash
 git branch --show-current
 git status
 ```
 
-### Step 2: IssueのタスクをReadする
+### Step 2 IssueのタスクをReadする
 
 ```bash
 gh issue view [Issue番号]
@@ -25,7 +25,7 @@ gh issue view [Issue番号]
 
 取得したIssueのtitleとbodyからやるべきことを読み込み、タスクを把握する。
 
-### Step 3: ブランチ判定と対応
+### Step 3 ブランチ判定と対応
 
 - **現在のブランチ名に `#[Issue番号]` が含まれる場合**: そのまま継続使用可能。Step 5へスキップ
 - **上記以外の場合（`develop`・`main`・別Issueのブランチ）**: 対象Issue番号に対応する既存ブランチを探す
@@ -42,7 +42,7 @@ git checkout [見つかったブランチ名]
 
 - **見つからない場合**: Step 4へ進み新規ブランチを作成する
 
-### Step 4: 新規ブランチ作成
+### Step 4 新規ブランチ作成
 
 下記「ブランチ命名規則」に従いブランチ名を決定し、ユーザーに提案して承認を得てから作成する。
 `gh issue develop` を使うのは、ブランチ名にIssue番号を含めるだけではIssueのDevelopmentセクションへ
@@ -52,7 +52,7 @@ git checkout [見つかったブランチ名]
 gh issue develop [Issue番号] --name "feature/[英語概要]#[Issue番号]" --base develop --checkout
 ```
 
-### Step 5: 作業開始前の最終確認
+### Step 5 作業開始前の最終確認
 
 ```bash
 git branch --show-current

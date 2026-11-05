@@ -7,7 +7,7 @@ description: Self-Improvement Rules (STATE / Memory / Verification Loop / Router
 このプロジェクトを「実行するたびに賢くなるシステム」として運用するためのルール。
 4つの仕組みで構成される。
 
-**記録の正本は`_llm-memories/`直下の3ファイル**（`state.md` / `lessons.md` / `episodes.md`）。
+記録の正本は`_llm-memories/`直下の3ファイル（`state.md` / `lessons.md` / `episodes.md`）。
 実行記録をこれ以外の場所に二重保存しない。
 読むときはRead、更新するときはEditで変更箇所だけを置換する。
 `old_string`は一致が1箇所になるよう指定する。必要に応じて見出しや前後の行を含める。

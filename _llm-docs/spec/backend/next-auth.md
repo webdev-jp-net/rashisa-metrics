@@ -54,7 +54,7 @@ Google OAuthを利用したNextAuth.js 4系の構成。JWTセッションスト�
 3. `LoginPrompt`のボタンは、`signedOut`なら「ログインする」（`signIn('google')`でGoogleの認証画面へ遷移）、`notAllowed`なら「ログアウトする」（`signOut()`）
 4. Googleでの認証後、`jwt`コールバックが`email_verified === true`のときだけメールアドレスをトークンへ写し（`false`ならトークンのメールを`undefined`にする）、`session`コールバックが`session.user.email`へ渡す
 5. `isAllowedViewer`が`true`なら、`page.tsx`は続けて`getReportList(client, series.id)`でパスのシリーズの`report`だけを取り、`buildReportModel`でレポート本体（`ReportView`）を描画する。そのシリーズの`report`が0件、または`scopeList`と揃わなければ、欠けている`scope`を名指ししたエラーで止まる
-6. レポート表示中、ログインしていれば`Footer`の「ログアウトする」リンクから`signOut()`を呼べる。JavaScriptが動かない環境向けに、リンクの遷移先自体はNextAuthのサインアウト画面（`/api/auth/signout`）を指す
+6. レポート表示中、ログインしていれば`Footer`の「ログアウト」リンクから`signOut()`を呼べる。JavaScriptが動かない環境向けに、リンクの遷移先自体はNextAuthのサインアウト画面（`/api/auth/signout`）を指す
 
 ## 関連ドキュメント
 
