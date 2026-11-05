@@ -78,3 +78,25 @@ describe('targetFiles', () => {
     expect(targetFileList(input('Read', f), root, MD)).toEqual([])
   })
 })
+
+describe('git が無視するファイル', () => {
+  const initRepo = (gitignore: string) => {
+    Bun.spawnSync(['git', 'init', '-q'], { cwd: root })
+    writeFileSync(join(root, '.gitignore'), gitignore)
+  }
+
+  test('.gitignore に書いた .md は Edit / Write でも Bash でも対象にならない', () => {
+    initRepo('/source/\n')
+    write(BASH_MARK, 0)
+    const ignored = write('source/原稿 1.md', 10)
+    const tracked = write('docs/a.md', 10)
+    expect(targetFileList(input('Edit', ignored), root, MD)).toEqual([])
+    expect(targetFileList(input('Write', tracked), root, MD)).toEqual([tracked])
+    expect(targetFileList(input('Bash'), root, MD)).toEqual([tracked])
+  })
+
+  test('git の管理下でなければ何も外さない', () => {
+    const f = write('source/a.md', 0)
+    expect(targetFileList(input('Edit', f), root, MD)).toEqual([f])
+  })
+})

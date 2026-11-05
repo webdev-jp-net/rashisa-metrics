@@ -22,20 +22,20 @@ codex exec --sandbox read-only --cd <project_directory> < <request_file>
 
 ## プロンプトのルール
 
-**重要**: codexに渡すリクエストには、以下の指示を必ず含めること：
+重要: codexに渡すリクエストには、以下の指示を必ず含めること：
 
 > 「確認や質問は不要です。具体的な指摘・修正案・コード例まで自主的に出力してください。」
 
 ## ワークフロー
 
-### Step 1: レビュー対象の特定
+### Step 1 レビュー対象の特定
 
 `$ARGUMENTS`からレビュー対象を特定する：
 
 - ファイルパスや内容の説明が指定されている場合 → それを対象にする
 - 指定なしの場合 → `git rev-parse --verify HEAD` でコミットの有無を確かめ、あれば `git diff HEAD` の差分、無ければ `git status --short --untracked-files=all` が挙げた未追跡ファイルの内容を対象にする
 
-### Step 2: リクエストをファイルに書く
+### Step 2 リクエストをファイルに書く
 
 Writeツールで `.claude/tmp/review-request.md` に次の内容を書く。対象の中身もここに含める。
 
@@ -48,7 +48,7 @@ Writeツールで `.claude/tmp/review-request.md` に次の内容を書く。対
 確認や質問は不要です。具体的な指摘・修正案・コード例まで自主的に出力してください。
 ```
 
-### Step 3: Codex CLIでレビュー実行
+### Step 3 Codex CLIでレビュー実行
 
 出力は全文をファイルへ保存する。`head` / `tail` で切ると読むべき指摘が消えたことに気づけない。
 
@@ -57,6 +57,6 @@ codex exec --sandbox read-only --cd <project_directory> \
   < .claude/tmp/review-request.md > .claude/tmp/review-result.txt 2>&1
 ```
 
-### Step 4: 結果を返す
+### Step 4 結果を返す
 
 Codexの出力を呼び出し元（ユーザーまたは他のスキル）に返す。

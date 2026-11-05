@@ -16,7 +16,7 @@ PRが`develop`へマージされ、役割を終えたローカルfeatureブラ�
 
 ## ワークフロー
 
-### Step 1: 現在の状況確認
+### Step 1 現在の状況確認
 
 ```bash
 git branch --show-current
@@ -26,7 +26,7 @@ git status --short
 - 現在のブランチが`develop`／`main`の場合は、後始末対象のfeatureブランチがどれか不明。**どのブランチを削除するかユーザーに確認**する。
 - featureブランチ上にいる場合、それが後始末対象。未コミットの変更が残っていれば、削除前に扱い（コミット要否）を確認する。
 
-### Step 2: 統合先（develop）へ移動
+### Step 2 統合先（develop）へ移動
 
 削除対象のブランチ上からは自身を削除できないため、先に`develop`へ移動する。
 
@@ -34,7 +34,7 @@ git status --short
 git checkout develop
 ```
 
-### Step 3: developをマージ済みリモート状態へ更新
+### Step 3 developをマージ済みリモート状態へ更新
 
 ローカル`develop`が古いと、Step 5の安全削除が「未マージ」と誤判定される。`--ff-only`で履歴を壊さず最新化する。
 
@@ -42,7 +42,7 @@ git checkout develop
 git pull --ff-only
 ```
 
-### Step 4: リモートに同名ブランチが無いことを確認
+### Step 4 リモートに同名ブランチが無いことを確認
 
 ```bash
 git ls-remote --heads origin <feature-branch>
@@ -51,7 +51,7 @@ git ls-remote --heads origin <feature-branch>
 - **同名ブランチが無い** → ローカル削除OK。Step 5へ進む。
 - **同名ブランチが有る** → ローカル削除しない。リモートにまだ同名ブランチが残っている旨を報告して停止する（後始末の前提が整っていない）。
 
-### Step 5: ローカルfeatureブランチを安全削除
+### Step 5 ローカルfeatureブランチを安全削除
 
 ```bash
 git branch -d <feature-branch>
@@ -60,7 +60,7 @@ git branch -d <feature-branch>
 - `-d`は**マージ済みのブランチだけ**を削除する安全オプション。成功すればStep 6へ進む。
 - **失敗した場合**（"not fully merged"等）は、squash／rebaseマージでコミットが`develop`履歴に同一の形で残っていないことが主因。その理由をユーザーに説明し、**本当に破棄してよいか確認してから**`git branch -D <feature-branch>`（強制削除）を実行する。勝手に`-D`しない。`-D`が成功した場合もStep 6へ進む。
 
-### Step 6: 記録の更新
+### Step 6 記録の更新
 
 削除したブランチでの作業について、`_llm-memories/`直下の`state.md`・`lessons.md`・`episodes.md`を更新する（`_llm-rules/self_improvement.md`のMemory運用ルール）。更新前にこの3ファイルを読む。
 
@@ -72,7 +72,7 @@ git branch -d <feature-branch>
 
 記録の更新に失敗しても、ブランチの削除は巻き戻さない（削除は既に成立している）。更新できなかったファイル名と追記すべき内容を報告し、Step 7へ進む。
 
-### Step 7: 結果の報告
+### Step 7 結果の報告
 
 ```bash
 git branch

@@ -19,13 +19,13 @@
 3. **メッセージ生成**
    以下の3つの形式でメッセージ候補を日本語で提示:
 
-   **Option 1: 簡潔版**
+   Option 1: 簡潔版
 
    ```
    [動詞]: [簡潔な説明] #[Issue番号]
    ```
 
-   **Option 2: 詳細版**
+   Option 2: 詳細版
 
    ```
    [動詞]: [概要説明] #[Issue番号]
@@ -35,7 +35,7 @@
    - [影響や理由]
    ```
 
-   **Option 3: Conventional Commits形式**
+   Option 3: Conventional Commits形式
 
    ```
    [type]([scope]): [description] #[Issue番号]

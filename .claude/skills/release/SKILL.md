@@ -44,9 +44,9 @@ git show origin/develop:package.json | grep '"version"'
 
 ---
 
-## フェーズ1: リリース準備
+## フェーズ1 リリース準備
 
-### Step 1: 変更内容の収集
+### Step 1 変更内容の収集
 
 前回タグ以降にdevelopへ入った変更を収集する。
 
@@ -59,7 +59,7 @@ gh pr list --base develop --state merged --json number,title,mergedAt --limit 30
 
 前回タグ以降にマージされたPRのみを対象に絞り込む。
 
-### Step 2: バージョン番号の提案と承認
+### Step 2 バージョン番号の提案と承認
 
 変更一覧を以下の基準で分類し、推奨バンプと根拠を提示して**ユーザーの承認を得る**。
 機械的に確定しない（最終判断はユーザーの裁量。機能追加をpatchで出す判断もあり得る）。
@@ -76,7 +76,7 @@ gh pr list --base develop --state merged --json number,title,mergedAt --limit 30
 - **今回の変更**: 〈PR/Issueの一覧〉
 - **推奨**: 〈minor/patch/major〉 → v〈新バージョン〉（根拠を1行）
 
-### Step 3: リリースブランチ作成とバージョン更新
+### Step 3 リリースブランチ作成とバージョン更新
 
 承認された番号で実行する。
 
@@ -89,7 +89,7 @@ git commit -m "Update: [マイナー/パッチ/メジャー]バージョンア�
 git push -u origin release/v[新バージョン]
 ```
 
-### Step 4: main向けPR作成
+### Step 4 main向けPR作成
 
 以下のフォーマットで作成内容をユーザーに提示し、**承認後に**作成する。
 
@@ -108,9 +108,9 @@ PR作成後、URLを提示して「マージされたら再度このスキルを
 
 ---
 
-## フェーズ2: リリース発行
+## フェーズ2 リリース発行
 
-### Step 5: マージ確認
+### Step 5 マージ確認
 
 フェーズ判定で引き継いだPR番号を使う。改めて最新のマージ済みPRを取り直さない（リリースPR以外を拾う）。
 
@@ -120,7 +120,7 @@ gh pr view [引き継いだPR番号] --json number,headRefName,mergedAt,mergeCom
 
 リリースPRのマージを確認する。未マージなら報告して終了。
 
-### Step 6: リリースノート作成と発行
+### Step 6 リリースノート作成と発行
 
 変更内容（Step 1と同じ収集方法）をもとに、**利用者向けの日本語の平文**でノート原稿を作成する。
 
@@ -135,10 +135,10 @@ gh pr view [引き継いだPR番号] --json number,headRefName,mergedAt,mergeCom
 gh release create v[新バージョン] --target main --title "v[新バージョン]" --notes "[承認済みノート]"
 ```
 
-### Step 7: developへのback-merge（必須・省略不可）
+### Step 7 developへのback-merge（必須・省略不可）
 
 bumpコミットをdevelopへ反映する。この検証まで完了してリリース完了とする。
-**developへ直接pushしない**（変更は必ずPR経由。ブランチ運用ルールに従う）。
+developへ直接pushしない（変更は必ずPR経由。ブランチ運用ルールに従う）。
 
 以下の内容をユーザーに提示し、**承認後に**back-merge PRを作成する。
 
@@ -153,7 +153,7 @@ git show origin/main:package.json | grep '"version"'
 git show origin/develop:package.json | grep '"version"'
 ```
 
-### Step 8: 後始末
+### Step 8 後始末
 
 ローカルのリリースブランチ削除をユーザーに確認してから実行する。
 

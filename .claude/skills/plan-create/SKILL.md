@@ -12,15 +12,15 @@ disable-model-invocation: true
 
 ## ワークフロー
 
-### Step 1: 実行原則の確認
+### Step 1 実行原則の確認
 
 Skillツールで `my-rfp` を実行し、実行原則を確認する。
 
-### Step 2: PLANモードに入る
+### Step 2 PLANモードに入る
 
 EnterPlanModeツールを使用してPLANモードに入る。
 
-### Step 3: 対象の探索
+### Step 3 対象の探索
 
 Taskツール（subagent_type=Explore）で関連仕様書を探索する。
 
@@ -31,7 +31,7 @@ Taskツール（subagent_type=Explore）で関連仕様書を探索する。
 上記を起点に、ユーザーの要件に関連する仕様書パスを特定する。
 ユーザーが参考リンク・資料を提示している場合はあわせて収集する。
 
-### Step 4: 原稿の作成（会話内）
+### Step 4 原稿の作成（会話内）
 
 以下のテンプレートで原稿を作成する（**この時点ではファイルに保存しない**）。
 
@@ -66,7 +66,7 @@ Taskツール（subagent_type=Explore）で関連仕様書を探索する。
 - {Step 3 で特定した関連仕様書パス2}
 ```
 
-**作成ルール**：
+作成ルール：
 
 - 設計方針としてYAGNI（今必要でないものは作らない）とDRY（重複を避ける）に従う
 - AIが一般的なベストプラクティスや想定要件を独自に追加することは禁止
@@ -79,7 +79,7 @@ Taskツール（subagent_type=Explore）で関連仕様書を探索する。
   - 明示された技術スタックの公式リファレンス
 - `## 仕様書`にはStep 3で確認した`_llm-docs/`配下の関連仕様書パスのみ記載する
 
-### Step 5: Codex CLIレビュー（最大10回）
+### Step 5 Codex CLIレビュー（最大10回）
 
 Skillツールで`doc-review`を実行し、作成した原稿をレビューする。
 引数として原稿の内容または保存パスを渡す。
@@ -88,14 +88,14 @@ Skillツールで`doc-review`を実行し、作成した原稿をレビューす
 
 指摘事項があれば原稿を修正し、最大10回まで繰り返す。
 
-### Step 6: ファイルへの保存
+### Step 6 ファイルへの保存
 
 ExitPlanModeツールで計画の承認を得た後、`.claude/tmp/issue/[slug]-[timestamp].md` に保存する。
 
 - `[slug]`: 内容を表す英語のケバブケース（例: `add-search-feature`, `fix-login-flow`）
 - `[timestamp]`: `YYYYMMDDHHmmss` 形式
 
-### Step 7: PLANモードを終了・次のアクションを案内
+### Step 7 PLANモードを終了・次のアクションを案内
 
 保存後、以下をユーザーに提示する：
 
